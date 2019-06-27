@@ -1,0 +1,36 @@
+﻿@model ClanWeb.Web.Models.AddThreadViewModel
+
+@{
+    Layout = "~/Views/Forum/_layout.cshtml";
+    ViewBag.Title = "AddThread";
+}
+
+@using (Html.BeginForm("AddThread", "Forum",  new { groupId = ViewBag.GroupId }, FormMethod.Post , new { @class = "form-horizontal", role = "form" }))
+{
+    <h2>Add a new thread</h2>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstMessage, new { @class = " col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.FirstMessage, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Tags, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Tags, new { @class = "form-control", @placeholder = "Bike, Dirty Bomb, Game" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3 col-md-offset-2">
+            <input type="submit" class="btn btn-default" value="Submit Thread" />
+        </div>
+    </div>
+}
+

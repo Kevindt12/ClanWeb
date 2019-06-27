@@ -1,0 +1,1 @@
+﻿INSERT INTO GenerateCodes VALUES ('VXiOX0oERJylNH79spjJJOms8QozhhqSxabOrXtlSKfQ8fH82yf2qVhtf8loCawBgLLSRtMpNu2QS8gOU2nrP5iAOAAiJhJ0Awfw');

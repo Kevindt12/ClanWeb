@@ -1,0 +1,66 @@
+﻿@using ClanWeb.Web.Models
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<UsersViewModel>
+
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Admin/_layout.cshtml";
+}
+
+
+
+<h2>Users</h2>
+<table class="table table-striped" style="max-height:500px;">
+    <tr>
+        <th>
+            <text>Actions</text>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.First().Seniority)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.First().Role)
+        </th>
+        <th>
+            <text>Other Actions</text>
+        </th>
+    </tr>
+    @foreach (UsersViewModel user in Model)
+    {
+        <tr>
+            <td>
+                <div class="btn-group">
+                    <a class="btn btn-sm btn-secondary" href="@Url.Action("EditUser", "Admin", new { id = user.UserId } )"><i class='fa fa-pencil'></i> </a>
+                    <a class=" btn btn-sm btn-danger" href="@Url.Action("BanUser", "Admin", new { id = user.UserId } )"><i class='fa fa-ban'></i></a>
+                </div>
+            </td>
+            <td>
+                @user.UserName
+            </td>
+            <td>
+                @user.Seniority
+            </td>
+            <td>
+                @user.Role
+            </td>
+            <td>
+                <div class="btn-group">
+                    @Html.ActionLink("Edit Role", "EditUserRole", "Admin", new { userId = user.UserId }, new { @class = "btn - btn-secondary" })
+                    @*Check first if user is banned*@
+                    @Html.ActionLink("Unban User", "EditUserRole", "Admin", new { id = user.UserId }, new { @class = "btn - btn-secondary" })
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+<div class="pull-right">
+    @Html.PagedListPager(Model, p => p == Page);
+
+</div>

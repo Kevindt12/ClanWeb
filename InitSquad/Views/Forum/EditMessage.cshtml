@@ -1,0 +1,27 @@
+﻿@using ClanWeb.Web.Models
+@model ClanWeb.Web.Models.EditMessageViewModel
+
+<div>
+    @Html.Partial("MessagePartial", (MessagesViewModel)ViewBag.MessageModel)
+</div>
+
+@using (Html.BeginForm("EditMessage", "Forum", new { threadId = ViewBag.ThreadId, groupId = ViewBag.GroupId, messageId = ViewBag.MessageId }))
+{
+    <div class="form-group-lg">
+        @Html.LabelFor(Model => Model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            @Html.EditorFor(Model => Model.Body)
+            @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

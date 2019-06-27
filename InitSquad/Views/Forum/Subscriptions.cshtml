@@ -1,0 +1,26 @@
+﻿@using ClanWeb.Web.Models
+@model List<SubscriptionsThreadsViewModel>
+
+
+@{
+    ViewBag.Title = "Subscriptions";
+    Layout = "~/Views/Manage/_layout.cshtml";
+}
+
+
+@foreach (SubscriptionsThreadsViewModel item in Model)
+{
+    <div class="row">
+        <div class="col-sm-7">
+            @Html.ActionLink(item.ThreadName, "Thread", "Forum", new { threadId = item.ThreadId, groupId = item.GroupId }, null)
+            <p style="font-size:8px;">
+                Last Activity: @item.LastEditedToThread
+            </p>
+        </div>
+        <div class="col-sm-5">
+            Last user to post message: @item.LastUserThatAddedAMessage
+        </div>
+    </div>
+    <br />
+}
+

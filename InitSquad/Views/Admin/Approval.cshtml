@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ClanWeb.Web.Models.ApprovalUsersListViewModel>
+
+@{
+    ViewBag.Title = "Approval";
+    Layout = "~/Views/Admin/_layout.cshtml";
+}
+
+<h3>Waiting for approval</h3>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            Action
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Applied)
+        </th>
+        <th>
+            Steam Account
+        </th>
+        <th>
+            Discord Account
+        </th>
+
+    </tr>
+
+    @foreach (var user in Model)
+    {
+        <tr>
+            <th>
+                <div class="btn-group">
+                    <button class="btn btn-sm btn-success approve-user" data-userId="@user.UserId"><i class="fa fa-check"></i></button>
+                    <button class="btn btn-sm btn-danger disapprove-user" data-userId="@user.UserId"><i class="fa fa-times"></i></button>
+                </div>
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => user.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.Applied)
+            </td>
+            <td>
+                <a href="#" class="btn btn-secondary">Steam</a>
+            </td>
+            <td>
+                <a href="#" class="btn btn-secondary">Discord</a>
+            </td>
+
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Control Panel";
+    Layout = "~/Views/Shared/_layout.cshtml";
+
+}
+
+
+<style>
+    /** Makes the edges of the menu sharp */
+    .nav-pills .nav-link {
+        border-radius: unset;
+    }
+</style>
+
+
+<div class="container-fluid content">
+    <h2 style="padding-top:20px; padding-bottom:20px;">Profile Settings</h2>
+    <div class="row" style="min-height:600px;overflow: hidden;">
+        <div class="col-md-2 bg-light" style="padding-right:unset;padding-left:unset;padding-bottom:100%;margin-bottom:-100%;">
+            <nav class="nav nav-pills nav-fill navbar-light flex-column" style="min-height:600px;">
+                @Html.ActionLink("Home", "Index", "Admin", null, (ViewBag.ActivePage == "Index") ? new { @class = "nav-link active" } : new { @class = "nav-link" })
+                @(User.IsInRole("SeeUsers") ? @Html.ActionLink("Users", "Users", "Admin", null, ViewBag.ActivePage == "Users" ? new { @class = "nav-link active" } : new { @class = "nav-link" }) : null )
+
+
+
+                @(User.IsInRole("ApproveUsers") ? @Html.ActionLink("Waiting for approval", "Approval", "Admin", null, ViewBag.ActivePage == "Approval" ? new { @class = "nav-link active" } : new { @class = "nav-link" }) : null )
+
+                @(User.IsInRole("SeeNewsArticles") ? @Html.ActionLink("News Articles", "NewsArticles", "Admin", null, ViewBag.ActivePage == "NewsArticles" ? new { @class = "nav-link active" } : new { @class = "nav-link" }) : null )
+                @(User.IsInRole("SeeEvents") ? @Html.ActionLink("Events", "Events", "Admin", null, ViewBag.ActivePage == "Events" ? new { @class = "nav-link active" } : new { @class = "nav-link" }) : null )
+            </nav>
+        </div>
+        <div class="col-md-10 settings-content" style="padding-left:unset;padding-bottom:100%;margin-bottom:-100%;">
+            <div class="container" style="padding:20px;">
+                @RenderBody()
+            </div>
+            @RenderSection("scripts", required: false)
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,21 @@
+﻿@using ClanWeb.Web.Models
+@model UserCardViewModel
+
+
+<div class="col-md-2">
+    <div class="card">
+        <img class="card-img-top members-img" src="@Url.Content(Model.Image)" alt="~/Content/Images/profile-default.png" />
+        <div class="card-body">
+
+            <h5 class="card-title">@Model.UserName</h5>
+            <div class="card-text">
+
+                @*TODO Make this testible*@
+                @Html.GetFamFamFam().CountryImage(Model.Country, null)
+
+                <p class="MoveSenorityTextDown">@Model.Seniority</p>
+                <p class="MoveSenorityTextDown">@Model.Role</p>
+            </div>
+        </div>
+    </div>
+</div>

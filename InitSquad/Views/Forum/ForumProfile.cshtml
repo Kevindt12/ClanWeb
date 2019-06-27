@@ -1,0 +1,30 @@
+﻿@using ClanWeb.Web.Models
+@using ClanWeb.Web.ApplicationCode.UI.Web
+@model ForumProfleViewModel
+
+@{
+    ViewBag.Title = "ForumProfile";
+    Layout = "~/Views/Manage/_layout.cshtml";
+
+    string proflePicture = new ApplicationUserScripts().GetProfilePicture(Server, Model.UserId);
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        @*Picture*@
+        <div class="col-md-5">
+            <img class="profileimage img-responsive" src="@Url.Content(proflePicture)" height="200" width="200" />
+        </div>
+        @*Details*@
+        <div class="col-md-7">
+            <p>
+                You have posted this many times: @Model.PostCount
+            </p>
+            <p>
+                This is your reputation: @Model.Reputation
+            </p>
+        </div>
+    </div>
+</div>
+

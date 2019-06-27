@@ -1,0 +1,19 @@
+﻿@using ClanWeb.Web.Models
+@model List<LastActuvityThreadsViewModel>
+@{
+    ViewBag.Title = "LastAciverty";
+    Layout = "~/Views/Manage/_layout.cshtml";
+}
+
+
+@for (int i = 0; i < 12; i++)
+{
+    <div class="row">
+        <div class="col-sm-6">
+            @Html.ActionLink(Model[i].TheadName, "Thread", "Forum", new { threadId = Model[i].ThreadId, groupId = Model[i].GroupId }, null)
+        </div>
+        <div class="col-sm-6">
+            Date: @Model[i].DateOfActivery.ToShortDateString()
+        </div>
+    </div>
+}

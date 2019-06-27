@@ -1,0 +1,64 @@
+﻿@using ClanWeb.Web.Models
+@model RegisterViewModel
+@{
+    Layout = "~/Views/Account/_layout.cshtml";
+    ViewBag.Title = "Register";
+}
+
+<div class="row">
+    <h2  style="padding:20px; margin:auto;">@ViewBag.Title</h2>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="form-group">
+
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "User name" })
+                </div>
+            </div>
+            <div class="form-group">
+
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                </div>
+            </div>
+            <div class="form-group">
+
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                </div>
+            </div>
+            <div class="form-group">
+
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div style="padding-left:20px;" >
+                    <input id="submit" type="submit"  class="btn btn-default" value="Register" onload="disableAfterClick();" />
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-5">
+        <h3>How does it work</h3>
+        <hr />
+        <h5>Creating the account</h5>
+        <p>
+            You fill in the data here and we will proceed to check your steam and get in contact with you.
+        </p>
+        <h5>Aceptance process</h5>
+        <p>
+            We will talk about it internaly and then contact you your account will then be accessible for the website and the voice applicaion persmistion will aslo have been set if provided.
+        </p>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

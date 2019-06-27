@@ -1,0 +1,42 @@
+﻿@using ClanWeb.Web.Models
+@model MembersViewModel
+
+@{
+    ViewBag.Title = "Members";
+    Layout = "~/Views/Home/_layout.cshtml";
+}
+
+<style>
+    .col-md-2{
+        padding-top:10px;
+        padding-bottom:10px;
+    }
+</style>
+
+<br />
+<h2 style="padding:30px;">Aministrators</h2>
+<div class="row">
+    @foreach (var Member in Model.Administrators)
+    {
+        @Html.Partial("UserCard", Member)
+    }
+</div>
+
+
+<h2 style="padding:30px;">Moderators</h2>
+<div class="row">
+    @foreach (var Member in Model.Moderators)
+    {
+        @Html.Partial("UserCard", Member)
+    }
+</div>
+
+
+<h2 style="padding:30px;">Members</h2>
+<div class="row">
+    @foreach (var Member in Model.Members)
+    {
+        @Html.Partial("UserCard", Member)
+    }
+
+</div>

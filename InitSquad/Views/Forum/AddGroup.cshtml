@@ -1,0 +1,58 @@
+﻿@model ClanWeb.Web.Models.AddGroupViewModel
+
+@{
+    Layout = "~/Views/Forum/_layout.cshtml";
+    ViewBag.Title = "Add Group";
+
+
+}
+
+@using (Html.BeginForm("AddGroup", "Forum", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    <h2>Add a new group for the forums</h2>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="Image">Image</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Image, new { type = "file" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Category, new { @list="categories", @class= "col-md-2 control-label" })
+            <datalist id="categories">
+                @{ 
+                    foreach (string listItem in (IEnumerable<string>)ViewBag.Categories ?? new List<string>())
+                    {
+                        <option value="@listItem"></option>
+                    }
+                }
+            </datalist>
+            @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="submit" type="submit" class="btn btn-default" value="Submit" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

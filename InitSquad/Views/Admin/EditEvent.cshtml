@@ -1,0 +1,87 @@
+﻿@using ClanWeb.Web.Models
+@model EditEventViewModel
+@{
+    ViewBag.Title = "Edit Event";
+}
+<script>
+    $('#editEventDateTimePicker').datetimepicker({
+
+        // Changing it so it will show best for europe
+        locale: 'en-gb',
+        defaultDate: '@Model.EventDate',
+        // Setting today as minimum date
+        minDate: new Date(),
+        
+        // Setting up the format - ALERT Dont remove this it will break it
+        format: 'YYYY-MM-DD HH:mm:ss',
+        showClear: true,
+        toolbarPlacement: 'top'
+    });
+</script>
+
+<h2>Edit Event</h2>
+@using (Html.BeginForm("EditEvent", "Admin", FormMethod.Post, new { @class = "form-horizontal", @role = "form", @enctype = "multipart/form-data" }))
+{
+    <hr />
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.EventName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.EventName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.Description, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Game, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Game, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Location, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Location, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.EventDate, new { @class = "col-md-2 control-label" })
+            <div class="col-md-4">
+                <div class='input-group date' id='editEventDateTimePicker'>
+                    @Html.TextBoxFor(m => m.EventDate, new { @class = "form-control" })
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        @if (Model.OrginalImageUrl != null)
+        {
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="orginialImage">Orginal</label>
+                <div class="col-md-10">
+                    <img class="img-responsive editeventimage" src="@Url.Content(Model.OrginalImageUrl)" />
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Image">New Image</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Image, new { type = "file" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="submit" type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+        <br />
+    </div>
+}
+
+

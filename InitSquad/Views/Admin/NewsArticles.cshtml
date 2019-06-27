@@ -1,0 +1,48 @@
+﻿@using ClanWeb.Web.Models
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<ANewsArticlesViewModel>
+
+@{
+    ViewBag.Title = "NewsArticles";
+    Layout = "~/Views/Admin/_layout.cshtml";
+}
+
+<h3>News Articles</h3>
+<div class="pull-right btn-group" style="padding-bottom:20px;">
+    <a href="@Url.Action("CreateNewsArticle", "Admin")" class="btn btn-secondary"><i class="fa fa-plus" style="padding-right:10px;"></i>Create News Article</a>
+</div>
+<table class="table table-striped">
+    <tr>
+        <th style="min-width:40px; max-width:80px;">
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.First().Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.First().Date)
+        </th>
+    </tr>
+    @foreach (ANewsArticlesViewModel Article in Model)
+    {
+        <tr>
+            <td>
+                <div class="btn-group">
+                    <a href="@Url.Action("EditNewsArticle", "Admin", new { id = Article.Id })" class="btn btn-sm btn-toolbar"><i class="fa fa-pencil"></i></a>
+                    <a href="@Url.Action("DeleteNewsArticle", "Admin", new { id = Article.Id })" class="btn btn-sm btn-danger confirm-delete"><i class="fa fa-trash"></i></a>
+                </div>       
+            </td>
+            <td>
+                @Article.Title
+            </td>
+            <td>
+                @Article.Date.ToLongDateString()
+            </td>
+        </tr>
+    }
+</table>
+
+
+<div>
+    @Html.PagedListPager(Model, p => Page)
+</div>

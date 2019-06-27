@@ -1,0 +1,22 @@
+﻿@using ClanWeb.Web.Models
+@model List<NewsArticlePreviewViewModel>
+
+<h2>News</h2>
+@foreach (NewsArticlePreviewViewModel news in Model)
+{
+    <div class="blocknews">
+        <div class="blocknews-head">
+            <a href="@Url.Action("NewsArticle", "Home", new { id = news.Id })"><h3>@news.Title</h3></a>
+        </div>
+        <div class="blocknews-body">
+            <p>@Html.Raw(news.TextArea)</p>
+            <div class="col-md-2 col-md-offset-10">
+                <text class="date-time-news-feed">@news.Date.ToShortDateString()</text>
+            </div>
+        </div>
+        <br />
+    </div>
+    
+}
+<br />
+@Html.ActionLink("All Articles", "AllNewsArticles", "Home", new { @class = " col-md-offset-10" })

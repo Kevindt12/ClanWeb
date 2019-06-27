@@ -1,0 +1,87 @@
+﻿@using ClanWeb.Web.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model ThreadViewModel
+
+@{
+    Layout = "~/Views/Forum/_layout.cshtml";
+    ViewBag.Title = Model.ThreadName;
+
+}
+<br />
+<h2>@Model.ThreadName</h2>
+<br />
+
+
+<div class="row">
+    <div class="col-md-6">
+        @*BreadCrumb*@
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb forum-breadcrumb">
+                <li class="breadcrumb-item">@Html.ActionLink("Forums", "Groups")</li>
+                <li class="breadcrumb-item">@Html.ActionLink((string)ViewBag.GroupName, "Threads", new { @groupId = ViewBag.GroupId })</li>
+                <li class="breadcrumb-item active" aria-current="page">@Model.ThreadName</li>
+            </ol>
+        </nav>
+    </div>
+
+
+    <div class="col-md-6">
+        <div class="float-right">
+            <div class="btn-group">
+                @*Subscribe button*@
+                <div class="forum-create">
+                    @if (Model.Subscribed == false)
+                    {
+                        <button id="btnsubscribe" class="btn btn-dark">Subscribe</button>
+                    }
+                    else
+                    {
+                        <button id="btnsubscribe" class="btn btn-success">Subscribed</button>
+                    }
+                </div>
+                @* Drop down for the settings of the thread*@
+                <div class="dropdown forum-dropdown-config">
+                    <button class="btn btn-toolbar  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-wrench"></i>
+                        <span class="caret"></span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @Html.ActionLink("Edit Thread", "EditThread", "Forum", new { groupId = ViewBag.GroupId }, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Delete Thread", "DeleteThread", "Forum", new { groupId = ViewBag.GroupId }, new { @class = "dropdown-item", @onclick = "return confirm('Are  you really sure you want to delete this group and all its messages');" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@{
+    // Now going to each message and rednering it
+    foreach (MessagesViewModel message in Model.Messages)
+    {
+        Html.RenderPartial("MessagePartial", message);
+    }
+}
+<br />
+<div class="float-right">
+    @Html.PagedListPager(Model.Messages, page => Url.Action("Thread", new { page, threadId = ViewBag.ThreadId, groupId = ViewBag.GroupId }))
+</div>
+
+<br />
+@*This is the add message partial*@
+<div class="row">
+    <div class="col-md-12">
+
+        @Html.Partial("AddMessagePartial", new AddMessageViewModel { GroupId = ViewBag.GroupId, ThreadId = ViewBag.ThreadId })
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/javascript")
+}

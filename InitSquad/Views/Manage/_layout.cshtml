@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_layout.cshtml";
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/site.css")
+    @Styles.Render("~/Content/sprite/famfamfam-flags.css")
+    @Scripts.Render("~/bundles/modernizr")
+
+}
+
+<style>
+    /** Makes the edges of the menu sharp */
+    .nav-pills .nav-link {
+        border-radius: unset;
+    }
+</style>
+
+<div class="container-fluid content">
+    <h2 style="padding-top:20px; padding-bottom:20px;">Profile Settings</h2>
+    <div class="row" style="min-height:600px;">
+        <div class="col-md-2" style="padding-right:unset;">
+            <nav class="nav nav-pills nav-fill navbar-light bg-light flex-column" style="min-height:600px;">
+                <a class="nav-link active" href="#">Active</a>
+                @Html.ActionLink("Hello", "Index", "Manage", new { @class = "nav-link" })
+                @Html.ActionLink("Change Profile", "Edit", "Manage",null, new { @class = "nav-link" })
+                @Html.ActionLink("Change Picture", "ChangeProfilePicture",null , "Manage", new { @class = "nav-link" })
+                @Html.ActionLink("Change Password", "ChangePassword", "Manage",null, new { @class = "nav-link" })
+            </nav>
+        </div>      
+        <div class="col-md-10 " style="padding-left:unset;">
+            <div class="settings-content">
+                <div class="container" style="padding:20px">
+                    @RenderBody()
+                </div>
+                @RenderSection("scripts", required: false)
+            </div>
+        </div>
+    </div>
+</div>
+  

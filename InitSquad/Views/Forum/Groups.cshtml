@@ -1,0 +1,81 @@
+﻿@using ClanWeb.Web.Models;
+@model IDictionary<string, ICollection<GroupViewModel>>
+
+@{
+    Layout = "~/Views/Forum/_layout.cshtml";
+    ViewBag.Title = "Groups";
+}
+
+<br />
+<br />
+
+
+@*Create Group button*@
+
+
+
+@*Bread Crumbs*@
+<div class="row">
+    <div class="col-md-6">
+        <nav aria-label="breadcrumb ">
+            <ol class="breadcrumb forum-breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Forums</li>
+            </ol>
+        </nav>
+    </div>
+
+    @*<div class="btn-group col-md-offset-11">
+            @Html.ActionLink("Create", "AddGroup", "Forum", new { @class = "btn btn-default" })
+        </div>*@
+    <div class="col-md-6">
+        <div class="dropdown float-right">
+            <button class="btn btn-toolbar dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-wrench"></i>
+                <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @Html.ActionLink("Add New Group", "AddGroup", "Forum", new { @class = "dropdown-item" })
+            </div>
+        </div>
+    </div>
+</div>
+
+@foreach (KeyValuePair<string, ICollection<GroupViewModel>> groupsCategories in Model)
+{
+    <div class="topgroupsetbar">
+        <div class="forumgroupsetbar row">
+            <text>@groupsCategories.Key</text>
+        </div>
+    </div>
+    <ul class="forum">
+        @foreach (GroupViewModel group in groupsCategories.Value)
+        {
+            <li>
+                <div class="row forumgrouprow">
+                    <div class="col-md-1">
+                        <p>
+                            <img style="padding-top:7px;" src="@Url.Content(group.Image ?? "")" height="50" width="60" />
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="normal forumthreadgrouprow">@Html.ActionLink(group.Name, "Threads", "Forum", new { groupId = group.Id }, null)</p>
+                        <p class="small">@group.Description</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="medium forumthreadgrouprow">Post count: @group.PostCount.ToString()</p>
+                        <p class="medium">Thread Count: @group.ThreadCount.ToString()</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="normal" style="margin-bottom:-4px">@group.LastPostedThreadName</p>
+                        <p class="small">@group.LastPostedThreadUserName</p>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+}
+
+
+
+
+

@@ -1,0 +1,55 @@
+﻿@using ClanWeb.Web.Models
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<AEventsViewModel>
+@{
+    ViewBag.Title = "Events";
+    Layout = "~/Views/Admin/_layout.cshtml";
+
+}
+
+<h2>Events</h2>
+<div class="pull-right btn-group" style="padding-bottom:20px;">
+    <a href="@Url.Action("CreateEvent", "Admin")" class="btn btn-secondary"><i class="fa fa-plus" style="padding-right:10px;"></i>Create Clan Event</a>
+</div>
+<table class="table table-striped">
+    <tr>
+        <th style="min-width:40px;">
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.First().Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.First().Date)
+        </th>
+    </tr>
+    @foreach (var Event in Model)
+    {
+    <tr>
+        <td>
+            <div class="btn-group">
+                <a href="@Url.Action("EditEvent", "Admin", new { id = Event.Id })" class="btn btn-sm btn-toolbar"><i class="fa fa-pencil"></i></a>
+                <a href="@Url.Action("DeleteEvent", "Admin", new { id = Event.Id })" class="btn btn-sm btn-danger confirm-delete"><i class="fa fa-trash"></i></a>
+            </div>
+        </td>
+        <td>
+            @Html.Hidden("eventid", Event.Id, new { id = "eventid" })
+            <a href="#" class="eventlisting">@Event.Title</a>
+        </td>
+        <td>
+            @Event.Date.ToLongDateString()
+        </td>
+    </tr>
+    }
+</table>
+<hr />
+
+
+<div
+     >@Html.PagedListPager(Model, p => Page)
+</div>
+
+
+
+
+

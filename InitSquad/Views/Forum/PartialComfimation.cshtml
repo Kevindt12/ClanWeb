@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "PartialComfimation";
+}
+
+<script type="text/javascript">
+    function Submit() {
+            if (confirm("Are you sure you want to submit ?")) {
+                document.getElementById('anchortag').href += "?isTrue=true";
+            } else {
+                document.getElementById('anchortag').href += "?isTrue=false";
+            }
+            return true;
+        }
+</script>
+
+@Html.ActionLink("Submit", "Somemethod", "Home", new { @onclick = "return Submit();", id = "anchortag" })

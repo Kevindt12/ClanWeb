@@ -1,0 +1,29 @@
+﻿@using ClanWeb.Web.Models
+@model  EditThreadViewModel
+@{
+    ViewBag.Title = "EditThread";
+}
+
+@using (Html.BeginForm("EditThread", "Admin", new { groupId = ViewBag.GroupId, threadId = ViewBag.ThreadId }, FormMethod.Post, new { @class = "form-horizontal", role = "form" } ))
+{
+    <h2>Edit Thread</h2>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Tags, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Tags, new { @class = "form-control", @placeholder = "Bike, Dirty Bomb, Game" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Add" />
+        </div>
+    </div>
+}

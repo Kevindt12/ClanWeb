@@ -1,0 +1,49 @@
+﻿@using ClanWeb.Web.Models
+@model CreateNewsArticleViewModel
+
+@{
+    ViewBag.Title = "CreateNewsArticle";
+    Layout = "~/Views/Admin/_layout.cshtml";
+}
+
+<h2>Create A New News Article</h2>
+<hr />
+@using (Html.BeginForm("CreateNewsArticle", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.LongText, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.LongText, new { @class = "form-control", @Rows = "7" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Date, new { @class = "col-md-2 control-label" })
+            <div class="col-md-5">
+                <div class='input-group date' id='newsDateTimePicker'>
+                    @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="submit" type="submit" value="Create" class="btn btn-default" onclick="disableAfterClick();" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

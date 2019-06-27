@@ -1,0 +1,9 @@
+diff a/InitSquad/Web.Debug.config b/InitSquad/Web.Debug.config	(rejected hunks)
+@@ -0,6 +0,7 @@
+     "connectionString" to use "ReleaseSQLServer" only when the "Match" locator
+     finds an attribute "name" that has a value of "MyDB".
+ 
++    <connectionStrings>
+       <add name="MyDB"
+         connectionString="Data Source=ReleaseSQLServer;Initial Catalog=MyReleaseDB;Integrated Security=True"
+         xdt:Transform="SetAttributes" xdt:Locator="Match(name)"/>

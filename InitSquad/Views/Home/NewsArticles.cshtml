@@ -1,0 +1,88 @@
+﻿@using ClanWeb.Web.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<NewsArticlesListViewModel>
+
+@{
+    ViewBag.Title = "AllNewsArticles";
+}
+
+<h2>AllNewsArticles</h2>
+<hr />
+<div class="col-md-12">
+    @foreach (NewsArticlesListViewModel article in Model)
+    {
+        <div class="newsarticleline row">
+            <div class="col-md-8">
+                <p style="font-size:18px;padding-top:12px;">@Html.ActionLink(article.Title, "NewsArticle", new { id = article.Id })</p>
+            </div>
+            <div class="col-md-4">
+                <p style="font-size:12px;padding-top:3px;">@article.CreatedBy.ToString()</p>
+                <p style="font-size:12px;">@article.Published.ToString()</p>
+            </div>
+        </div>
+
+    }
+
+</div>
+
+@Html.PagedListPager(Model, page => Url.Action("newsarticles", new { page }))
+
+
+
+@*<div class="row pagecount">
+
+    @if (page == 1)
+    {
+        // The currenct page
+        <span style="color:#0094ff;">@page.ToString()</span> // This is disabled
+
+        // Up comiong pages
+        for (int i = page + 1; (i < (page + 7) && i <= MaxPageCount); i++)
+        {
+            <span>@Html.ActionLink((i).ToString(), "AllNewsArticles", new {  page = i })</span>
+        }
+
+        // Last page
+        @Html.ActionLink("Last", "AllNewsArticles", new {  page = MaxPageCount });
+    }
+    else if (page > 1 && page < MaxPageCount)
+    {
+        // First page
+        <span>@Html.ActionLink("First", "AllNewsArticles", new {  page = 1 })</span>
+
+        int beginloop = Math.Max(1, page - 7);
+
+        // Last max 7 pages
+        for (int i = beginloop; (i < (beginloop + 7) && i < page); i++)
+        {
+            <span>@Html.ActionLink((i).ToString(), "AllNewsArticles", new {  page = i })</span>
+        }
+
+        // Currenct page
+        <span style="color:#0094ff;">@page.ToString()</span> // This is disabled
+
+        // Up coming pages
+        for (int i = page + 1; ((i < (page + 7)) && (i <= MaxPageCount)); i++)
+        {
+            <span>@Html.ActionLink((i).ToString(), "AllNewsArticles", new {  page = i })</span>
+        }
+
+        // Last page
+        <span>@Html.ActionLink("Last", "AllNewsArticles", new {  page = MaxPageCount })</span>
+
+    }
+    else if (page == MaxPageCount)
+    {
+        <span>@Html.ActionLink("First", "AllNewsArticles", new {  page = 1 })</span>
+        int beginloop = Math.Max(1, page - 7);
+
+        for (int i = beginloop; (i < (beginloop + 7) && i < page); i++)
+        {
+            <span>@Html.ActionLink((i).ToString(), "AllNewsArticles", new {  page = i })</span>
+        }
+        <span style="color:#0094ff;">@page.ToString()</span> // This is disabled
+    }
+    @*Math.max(Min number, The calculation)*@
+
+

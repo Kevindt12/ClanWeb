@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "ReferalLink";
+    string code = ViewBag.Code;
+}
+
+<h2>ReferalLink</h2>
+<p>
+    Welcome to initsquad You got a refal link from one of our admin or recruters. Ready to create you're account? Click @Html.ActionLink("Here", "ContenueRegistrationFromLink", new { code = code }) to contenue
+</p>
+

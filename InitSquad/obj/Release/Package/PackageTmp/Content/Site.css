@@ -1,0 +1,539 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    overflow-x: hidden;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.container {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+/*Custom Classes*/
+.loginbox {
+    padding-left: 28px;
+    padding-right: 28px;
+    background-color: #3f3f3f;
+}
+
+.date-time-news-feed {
+    font-size: 8px;
+    text-align: right;
+}
+
+.SecondFlagPosition {
+    margin-left: 20px;
+    margin-top: -8px;
+}
+
+.MoveSenorityTextDown {
+    margin-top: 2px;
+}
+
+.banner {
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+.backgroundcolor {
+    background-color: #323232;
+}
+
+.textcolor {
+    color: #fff;
+}
+
+.containerbox {
+    background-color: #2f2f2f;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.Username {
+    font-size: 120%;
+}
+
+.footer {
+    position: relative;
+    margin-top: -150px; /* negative value of footer height */
+    height: 150px;
+    clear: both;
+    padding-top: 20px;
+}
+
+
+.right-sidebar {
+    padding-right: 8px;
+}
+
+
+
+.nav-side-menu {
+    overflow: auto;
+    font-family: verdana;
+    font-size: 12px;
+    font-weight: 200;
+    background-color: #313131;
+    position: relative;
+    width: 275px;
+    height: 100%;
+    color: #ccc;
+}
+
+    .nav-side-menu .brand {
+        background-color: #232323;
+        line-height: 50px;
+        display: block;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .nav-side-menu .toggle-btn {
+        display: none;
+    }
+
+    .nav-side-menu ul,
+    .nav-side-menu li {
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+        line-height: 35px;
+        cursor: pointer;
+    }
+
+
+        .nav-side-menu ul :not(collapsed) .arrow:before,
+        .nav-side-menu li :not(collapsed) .arrow:before {
+            font-family: FontAwesome;
+            content: "\f078";
+            display: block;
+            padding-left: 10px;
+            padding-right: 14px;
+            float: right;
+            vertical-align: middle;
+        }
+
+        .nav-side-menu ul .active,
+        .nav-side-menu li .active {
+            border-left: 3px solid #222;
+            background-color: #222;
+        }
+
+        .nav-side-menu ul .sub-menu li.active,
+        .nav-side-menu li .sub-menu li.active {
+            color: #d19b3d;
+        }
+
+            .nav-side-menu ul .sub-menu li.active a,
+            .nav-side-menu li .sub-menu li.active a {
+                color: #d19b3d;
+            }
+
+        .nav-side-menu ul .sub-menu li,
+        .nav-side-menu li .sub-menu li {
+            background-color: #252525;
+            border: none;
+            line-height: 28px;
+            border-bottom: 1px solid #23282e;
+            margin-left: 0px;
+        }
+
+            .nav-side-menu ul .sub-menu li:hover,
+            .nav-side-menu li .sub-menu li:hover {
+                background-color: #161616;
+            }
+
+            .nav-side-menu ul .sub-menu li:before,
+            .nav-side-menu li .sub-menu li:before {
+                font-family: FontAwesome;
+                content: "\f105";
+                display: block;
+                padding-left: 10px;
+                padding-right: 14px;
+                float: left;
+                vertical-align: middle;
+            }
+
+    .nav-side-menu li {
+        padding-left: 0px;
+        border-left: 3px solid #2a2a2a;
+        border-bottom: 1px solid #222;
+    }
+
+        .nav-side-menu li a {
+            text-decoration: none;
+            color: #e1ffff;
+        }
+
+            .nav-side-menu li a i {
+                padding-left: 10px;
+                width: 20px;
+                padding-right: 20px;
+            }
+
+        .nav-side-menu li:hover {
+            border-left: 3px solid #020202;
+            background-color: #212121;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+
+@media (max-width: 767px) {
+    .nav-side-menu {
+        position: relative;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+        .nav-side-menu .toggle-btn {
+            display: block;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            z-index: 10 !important;
+            padding: 3px;
+            background-color: #ffffff;
+            color: #000;
+            width: 40px;
+            text-align: center;
+        }
+
+    .brand {
+        text-align: left !important;
+        font-size: 22px;
+        padding-left: 20px;
+        line-height: 50px !important;
+    }
+}
+
+@media (min-width: 767px) {
+    .nav-side-menu .menu-list .menu-content {
+        display: block;
+    }
+}
+
+
+.list-item {
+    padding-left: 5px;
+    display: block;
+}
+
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.right-infomation-bar {
+    margin-top:-1px;
+    background-color: #2b2b2b;
+    border-left-width: 1px;
+    border-left-color: #111;
+    border-left-style: solid;
+}
+
+.right-infomation-bar-teamspeak {
+    border-bottom-style: solid;
+    border-bottom-color: #111;
+    border-bottom-width: 1px;
+}
+
+.right-infomation-bar-discord {
+    padding-top: 2px;
+}
+
+
+ul.verticalnavbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #262626;
+}
+
+li.verticalnavbar a {
+    display: block;
+    color: #aaa;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+    /* Change the link color on hover */
+    li.verticalnavbar a:hover {
+        background-color: #3a3a3a;
+        color: #fff;
+    }
+
+
+
+ul.forum {
+    list-style: none;
+}
+
+div.forumgrouprow {
+    background-color: #353535;
+    border-bottom-style: solid;
+    border-bottom-color: #222;
+    border-bottom-width: 1px;
+    /*border-top-style:solid;
+    border-top-color:#111;
+    border-top-width:1px;*/
+}
+
+.forumthreadgrouprow {
+    margin-bottom: 0px;
+}
+
+p.normal {
+    font-size: 16px;
+}
+
+p.medium {
+    font-size: 14px;
+}
+
+p.small {
+    font-size: 12px;
+}
+
+
+
+
+/*This is for the message partialview for the messages*/
+
+div .messagehead {
+    background-color: #222;
+    font-size: 12px;
+}
+
+
+
+.countnumber {
+    text-align: right;
+    float: right;
+    position: absolute;
+    right: 15px;
+}
+
+.left {
+    background-color: #2b2b2b;
+}
+
+.right {
+    background-color: #222;
+}
+
+.rightbody {
+    margin-bottom: 8em;
+}
+
+.row.equal {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.signiture {
+    position: absolute;
+    bottom: 5px;
+    vertical-align: bottom;
+    width: 90%;
+}
+
+.bottumbar {
+    background-color: #2f2f2f;
+}
+
+.bottum-align-left {
+    float: left;
+    width: 50%;
+    background-color: #2f2f2f;
+}
+
+.bottum-align-right {
+    float: right;
+    width: 50%;
+    text-align: right;
+    background-color: #2f2f2f;
+}
+
+.repuation {
+    position: absolute;
+    float: right;
+    right: 10px;
+    top: 50px;
+    width: 10%;
+}
+
+.repuationnumber {
+    padding-left: 4px;
+}
+
+
+.profileimage {
+    padding: 10px;
+}
+
+
+.img-reputation-message {
+    position: relative;
+    float: right;
+    right: 15px;
+}
+
+.reputation-buttons {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.reputation-number {
+    padding: 2px;
+    margin: 1px;
+}
+
+
+div.forumgroupsetbar {
+    background-color: #282828;
+    padding-left: 9px;
+}
+
+div .topgroupsetbar {
+    margin-left: 40px;
+}
+
+.messagepostbutton {
+    position: relative;
+    float: right;
+    border-top: 10px;
+    margin-top: 25px;
+    left: -94px;
+}
+
+div.pagecount {
+    position: relative;
+    float: right;
+    right: 8%;
+}
+
+.modal-content {
+    background-color: #373737;
+}
+
+.bootstrap-datetimepicker-widget {
+    background-color: #313131;
+    color: #fff;
+}
+
+.newsarticle {
+    background-color: #2b2b2b;
+}
+
+.editeventimage {
+    max-height: 120px;
+    max-width: 150px;
+    height: auto;
+    width: auto;
+}
+
+.newsarticleline {
+    background-color: #232323;
+    border-bottom-color: white;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    padding-bottom: 4px;
+}
+
+.card {
+    height: 205px;
+    width: 195px;
+}
+
+.jumbotron {
+    background-color: #2f2f2f;
+}
+
+.thumbnail {
+    background-color: #2f2f2f;
+    border-color: #222;
+    color: white;
+}
+
+    .thumbnail .caption {
+        color: unset;
+    }
+
+
+
+
+.index-section-1 {
+    margin: 0 -9999rem;
+    margin-top:-20px;
+  padding-top:20px;
+    padding: 0.25rem 9999rem;
+    background-color: #212121;
+    background-image: url(Images/dark_geometric.png);
+}
+
+.index-section-2 {
+    margin: 0 -9999rem;
+    padding: 0.25rem 9999rem;
+    background-color: #323232;
+    background-image: url(Images/darkdenim3.png);
+}
+.index-section-3 {
+    margin: 0 -9999rem;
+    padding: 0.25rem 9999rem;
+    background-color: #212121;
+    background-image: url(Images/dark_geometric.png);
+}
+.index-section-4 {
+    margin: 0 -9999rem;
+    padding: 0.25rem 9999rem;
+    background-color: #323232;
+    background-image: url(Images/darkdenim3.png);
+}
+
+.navbar-buttons{
+    padding-left:130px;
+}
+
+.event-bound-first {
+    border-top-style: solid;
+}
+
+.event-bound{
+    padding-top:11px;
+    background-color:#222;
+    padding-bottom:11px;
+    padding-left:30px;
+    border-top-style:unset;
+    border-color:#666;
+    border-style:solid;
+    border-width:1px;
+}

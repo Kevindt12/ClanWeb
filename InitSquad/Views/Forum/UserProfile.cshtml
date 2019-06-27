@@ -1,0 +1,56 @@
+﻿@using ClanWeb.Web.Models
+@model UserProfileViewModel
+
+@{
+    ViewBag.Title = "UserProfile";
+}
+
+@*TODO: Finish this forum*@
+
+<h3>UserName Profile</h3>
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <img src="@Url.Content(Model.Image)" width="105" height="105" />
+        </div>
+        <div class="row">
+            <div class="famfamfam-flags @Model.Country"><div class="SecondFlagPosition famfamfam-flags @Model.SecondCountry"></div></div>
+            <p>
+                User Name: @Model.UserName
+            </p>
+            <p>
+                Steam User Name: @Model.SteamUserName
+            </p>
+            <p>
+                Seniorty: @Model.Seniorty
+            </p>
+            <p>
+                Role: @Model.Role
+            </p>
+            <p>
+                Description: @Model.Description
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <p>
+                Reputaion: @Model.Reputation
+            </p>
+            <p>
+                Post Count: @Model.Postcount
+            </p>
+            <p>
+                Last Activity: @Model.LastActivity
+            </p>
+            <p>
+                Join Date: @Model.JoinDate
+            </p>
+            <p>
+                <a href="@Model.SteamUrl">Steam Profile</a>
+            </p>
+        </div>
+    </div>
+</div>
+

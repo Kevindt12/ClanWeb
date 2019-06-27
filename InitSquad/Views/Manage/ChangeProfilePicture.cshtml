@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "ChangeProfilePicture";
+    Layout = "~/Views/Manage/_layout.cshtml";
+}
+
+<h2>Change your profile Picture</h2>
+
+@using (Html.BeginForm("ChangeProfilePicture", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <p>Change your profile picture here</p>
+    <br />
+    <input type="file" name="file" />
+    <br />
+    <input class="btn btn-default" type="submit" value="Upload" />
+    <br />
+
+}

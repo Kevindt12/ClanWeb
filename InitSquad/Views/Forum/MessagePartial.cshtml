@@ -1,0 +1,116 @@
+﻿@model ClanWeb.Web.Models.MessagesViewModel
+
+
+<style>
+    .row {
+        margin-left: unset;
+        margin-right: unset;
+    }
+</style>
+
+<br />
+<div class="messagebox">
+    <div class="messagehead">
+        <div class="row">
+            <div class="col-md-12 remove-padding">
+                <text class="messagehead-timestamp">@Model.MessagePost.ToString()</text>
+                <text class="messagehead-countnumber">@Model.MessageNumber.ToString()</text>
+            </div>
+        </div>
+    </div>
+    <div class="messagebox-content">
+        <div class="row">
+            <div class="col-md-2 content-userinfo">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="repuationsystem">
+                            @Html.Hidden("messageid", Model.Id.ToString(), new { @id = "messageid" })
+                            @if (Model.VotingEnabled)
+                            {
+                                <button type="button" class="btn-md btn-link reputation-buttons votes_manager increase">
+                                    <span class="fa fa-angle-up"></span>
+                                </button>
+                                <div style="padding-left:9px;" class="displayer">@Model.Reputation.ToString()</div>
+                                <button type="button" class="btn-md btn-link reputation-buttons votes_manager decrease">
+                                    <span class="fa fa-angle-down"></span>
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn-md btn-link reputation-buttons votes_manager increase" onclick="@Url.Action("MessageReputationUp", "Forum", new { groupId = Model.GroupId, threadId = Model.ThreadId, messageId = Model.Id })" disabled>
+                                    <span class="glyphicon glyphicon-arrow-up"></span>
+                                </button>
+                                <div style="padding-left:9px;" class="displayer">@Model.Reputation.ToString()</div>
+                                <button type="button" class="btn-md btn-link reputation-buttons votes_manager decrease" onclick="@Url.Action("MessageReputationDown", "Forum", new { groupId = Model.GroupId, threadId = Model.ThreadId, messageId = Model.Id }) " disabled>
+                                    <span class="glyphicon glyphicon-arrow-down"></span>
+                                </button>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <img class="img-responsive" src="@Url.Content(Model.Image)" width="135" height="135" />
+                        <div class="famfamfam-flags @Model.Country"></div>
+                    </div>
+                </div>
+                <p style="padding-top:15px;">
+                    <a href="@Url.Action("UserProfile", "Forum", new { username = Model.UserName })">@Model.UserName</a>
+                </p>
+                <p>
+                    Steam Name: @Model.SteamUserName
+                </p>
+                <p>
+                    Posts: @Model.Posts.ToString()
+                </p>
+                <p>
+                    Join Date: @Model.JoinDate.ToShortDateString()
+                </p>
+            </div>
+            <div class="col-md-10 content-body">
+                <div class="col-md-12 content-body-body">
+                    <p>
+                        @Html.Raw(Model.Body)
+                    </p>
+                </div>
+                <div class="col-md-12 content-body-signiture">
+                    <p>
+                        @Model.Signiture
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row messagebox-bottombar">
+        <div class="col-md-6">
+            @if (Model.IsCreator && Model.Deleted == false)
+            {
+                <div class="dropdown">
+                    <a class="dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        User
+                        <i class="fa fa-wrench"></i>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @Html.ActionLink("Edit Message", "EditMessage", "Forum", new { groupId = Model.GroupId, threadId = Model.ThreadId, messageId = Model.Id }, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Delete Message", "RemoveMessage", "Forum", new { groupId = Model.GroupId, threadId = Model.ThreadId, messageId = Model.Id }, new { @class = "dropdown-item", @onclick = "return confirm('Are you sure you wish to delete this?');" })
+                    </div>
+                </div>
+            }
+            else
+            {
+
+            }
+        </div>
+        <div class="col-md-6">
+            <div class="dropdown float-right">
+                <a class="dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Admin
+                    <i class="fa fa-wrench"></i>
+                    <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @Html.ActionLink("Delete Messagew", "RemoveMessage", "Forum", new { groupId = Model.GroupId, threadId = Model.ThreadId, messageId = Model.Id }, new { @class = "dropdown-item" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

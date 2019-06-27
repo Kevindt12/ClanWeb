@@ -1,0 +1,26 @@
+﻿@using ClanWeb.Web.Models
+@model GotCodeViewModel
+
+@{
+    ViewBag.Title = "Got a code";
+}
+
+<h2>Have you gotten a code?</h2>
+@using (Html.BeginForm("GotCode", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <p>Have you gotten a code from one of our Admins? Fill it in and become a member!</p>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Code, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="submit" type="submit" class="btn btn-default" onclick="disableAfterClick();" />
+        </div>
+    </div>
+}

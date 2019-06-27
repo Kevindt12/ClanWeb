@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ForumDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ForumUsers">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+    <Property Name="Reputation" Type="int" Nullable="false" />
+    <Property Name="PostsCount" Type="int" Nullable="false" />
+    <Property Name="Signature" Type="nvarchar(max)" />
+    <Property Name="LastActivity" Type="datetime" Nullable="false" />
+    <Property Name="JoinDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Image" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Images">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ImageName" Type="nvarchar(max)" />
+    <Property Name="ImageFormat" Type="nvarchar(max)" />
+    <Property Name="SizeKB" Type="int" Nullable="false" />
+    <Property Name="ViewCount" Type="int" Nullable="false" />
+    <Property Name="ThreadId" Type="int" Nullable="false" />
+    <Property Name="UploadedByUserId" Type="int" Nullable="false" />
+    <Property Name="User_UserId" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="Messages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MessageCount" Type="int" Nullable="false" />
+    <Property Name="Body" Type="nvarchar(max)" />
+    <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+    <Property Name="ThreadId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="PrivateMessages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar(max)" />
+    <Property Name="Message" Type="nvarchar(max)" />
+    <Property Name="SendTime" Type="datetime" Nullable="false" />
+    <Property Name="SendById" Type="nvarchar(max)" />
+    <Property Name="SendToId" Type="nvarchar(max)" />
+    <Property Name="SendByUser_UserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="SendFromUser_UserId" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="Threads">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="NumberOfMessages" Type="int" Nullable="false" />
+    <Property Name="ViewCount" Type="int" Nullable="false" />
+    <Property Name="LastEdited" Type="datetime" Nullable="false" />
+    <Property Name="Vote" Type="int" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <Association Name="FK_dbo_Images_dbo_ForumUsers_User_UserId">
+    <End Role="ForumUsers" Type="Self.ForumUsers" Multiplicity="0..1" />
+    <End Role="Images" Type="Self.Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ForumUsers">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="User_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Images_dbo_Threads_ThreadId">
+    <End Role="Threads" Type="Self.Threads" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Images" Type="Self.Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Threads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="ThreadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Messages_dbo_ForumUsers_UserId">
+    <End Role="ForumUsers" Type="Self.ForumUsers" Multiplicity="0..1" />
+    <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ForumUsers">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Messages">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Messages_dbo_Threads_ThreadId">
+    <End Role="Threads" Type="Self.Threads" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Threads">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Messages">
+        <PropertyRef Name="ThreadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PrivateMessages_dbo_ForumUsers_SendByUser_UserId">
+    <End Role="ForumUsers" Type="Self.ForumUsers" Multiplicity="0..1" />
+    <End Role="PrivateMessages" Type="Self.PrivateMessages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ForumUsers">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="PrivateMessages">
+        <PropertyRef Name="SendByUser_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PrivateMessages_dbo_ForumUsers_SendFromUser_UserId">
+    <End Role="ForumUsers" Type="Self.ForumUsers" Multiplicity="0..1" />
+    <End Role="PrivateMessages" Type="Self.PrivateMessages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ForumUsers">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="PrivateMessages">
+        <PropertyRef Name="SendFromUser_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Threads_dbo_ForumUsers_UserId">
+    <End Role="ForumUsers" Type="Self.ForumUsers" Multiplicity="0..1" />
+    <End Role="Threads" Type="Self.Threads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ForumUsers">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Threads">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Threads_dbo_Groups_GroupId">
+    <End Role="Groups" Type="Self.Groups" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Threads" Type="Self.Threads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Threads">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ForumDatabaseModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ForumUsers" EntityType="Self.ForumUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PrivateMessages" EntityType="Self.PrivateMessages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Threads" EntityType="Self.Threads" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dbo_Images_dbo_ForumUsers_User_UserId" Association="Self.FK_dbo_Images_dbo_ForumUsers_User_UserId">
+      <End Role="ForumUsers" EntitySet="ForumUsers" />
+      <End Role="Images" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Images_dbo_Threads_ThreadId" Association="Self.FK_dbo_Images_dbo_Threads_ThreadId">
+      <End Role="Threads" EntitySet="Threads" />
+      <End Role="Images" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Messages_dbo_ForumUsers_UserId" Association="Self.FK_dbo_Messages_dbo_ForumUsers_UserId">
+      <End Role="ForumUsers" EntitySet="ForumUsers" />
+      <End Role="Messages" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Messages_dbo_Threads_ThreadId" Association="Self.FK_dbo_Messages_dbo_Threads_ThreadId">
+      <End Role="Threads" EntitySet="Threads" />
+      <End Role="Messages" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PrivateMessages_dbo_ForumUsers_SendByUser_UserId" Association="Self.FK_dbo_PrivateMessages_dbo_ForumUsers_SendByUser_UserId">
+      <End Role="ForumUsers" EntitySet="ForumUsers" />
+      <End Role="PrivateMessages" EntitySet="PrivateMessages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PrivateMessages_dbo_ForumUsers_SendFromUser_UserId" Association="Self.FK_dbo_PrivateMessages_dbo_ForumUsers_SendFromUser_UserId">
+      <End Role="ForumUsers" EntitySet="ForumUsers" />
+      <End Role="PrivateMessages" EntitySet="PrivateMessages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Threads_dbo_ForumUsers_UserId" Association="Self.FK_dbo_Threads_dbo_ForumUsers_UserId">
+      <End Role="ForumUsers" EntitySet="ForumUsers" />
+      <End Role="Threads" EntitySet="Threads" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Threads_dbo_Groups_GroupId" Association="Self.FK_dbo_Threads_dbo_Groups_GroupId">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Threads" EntitySet="Threads" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
